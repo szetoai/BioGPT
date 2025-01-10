@@ -4,11 +4,15 @@ import ChatLog from "./components/ChatLog";
 
 function App() {
   const [prompt, setPrompt] = useState("");
+  const [response, setResponse] = useState("");
   console.log(prompt);
   return (
     <>
-      <ChatLog userText={prompt} />
-      <PromptBox setPrompt={(x) => setPrompt(x)} />
+      <ChatLog userText={prompt} aiText={response} />
+      <PromptBox
+        setPrompt={(x) => setPrompt(x)}
+        setResponse={(x) => setResponse(x)}
+      />
     </>
   );
 }

@@ -2,16 +2,18 @@ import { useState } from "react";
 
 interface PromptBoxProps {
   setPrompt: (item: string) => void;
+  setResponse: (item: string) => void;
 }
 
 // the prompt box in which users can enter their text
-function PromptBox({ setPrompt }: PromptBoxProps) {
+function PromptBox({ setPrompt, setResponse}: PromptBoxProps) {
   // current text state
   const [curText, setCurText] = useState("");
   // submission handler
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setPrompt(curText);
+    setResponse(curText + " this is the response")
     setCurText("");
   }
   return (

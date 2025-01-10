@@ -1,13 +1,14 @@
 interface ChatLogProps {
   userText: string;
+  aiText: string;
 }
 
-function ChatLog({ userText }: ChatLogProps) {
+function ChatLog({ userText, aiText }: ChatLogProps) {
   return (
     <>
       <div className="chat-container">
         <div className="me">{userText}</div>
-        <div className="you">Hello! Great, and yourself?</div>
+        <div className="you">{aiText}</div>
       </div>
     </>
   );
