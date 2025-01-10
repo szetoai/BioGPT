@@ -1,8 +1,30 @@
 import { useState } from "react";
+import OpenAI from "openai";
+
+const openai = new OpenAI({
+  baseURL: "https://openrouter.ai/api/v1",
+  apiKey:
+    "key",
+  dangerouslyAllowBrowser: true,
+});
+
+async function GPT(input: string) {
+  const defaultPrompt = "Answer the following prompt using only knowledge appropriate for an AP Biology class for highschoolers. Make sure to only use appropriate language for teaching high schoolers and respond with unformatted text. "
+  const completion = await openai.chat.completions.create({
+    model: "deepseek/deepseek-chat",
+    messages: [
+      {
+        role: "user",
+        content: defaultPrompt + input,
+      },
+    ],
+  });
+  return completion.choices[0].message.content;
+}
 
 interface PromptBoxProps {
   setPrompt: (item: string) => void;
-  setResponse: (item: string) => void;
+  setResponse: (item: string | null) => void;
 }
 
 // the prompt box in which users can enter their text
@@ -13,7 +35,11 @@ function PromptBox({ setPrompt, setResponse}: PromptBoxProps) {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setPrompt(curText);
-    setResponse(curText + " this is the response")
+    setResponse("Thinking...")
+    GPT(curText)
+    .then((response) => {
+      setResponse(response);
+    })
     setCurText("");
   }
   return (
