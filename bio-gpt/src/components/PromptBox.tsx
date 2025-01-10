@@ -40,6 +40,9 @@ function PromptBox({ setPrompt, setResponse}: PromptBoxProps) {
     .then((response) => {
       setResponse(response);
     })
+    .catch(() => {
+      setResponse("Something went wrong. Please try again or contact the creator for support.")
+    });
     setCurText("");
   }
   return (
