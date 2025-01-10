@@ -1,0 +1,21 @@
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    .me,
+    .you {
+        margin-top: 1.5rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+    }
+
+    .me {
+        margin-left: auto;
+        border: solid 1px blue;
+        max-width: 55%;
+    }
+    .you {
+        margin-right: auto;
+        border: solid 1px red;
+        max-width: 55%;
+    }
+}

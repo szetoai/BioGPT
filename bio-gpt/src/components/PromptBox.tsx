@@ -1,14 +1,18 @@
 import { useState } from "react";
 
+interface PromptBoxProps {
+  setPrompt: (item: string) => void;
+}
+
 // the prompt box in which users can enter their text
-function PromptBox() {
-  // state variable that tracks the inputted text
-  const [prompt, setPrompt] = useState("");
+function PromptBox({ setPrompt }: PromptBoxProps) {
+  // current text state
+  const [curText, setCurText] = useState("");
   // submission handler
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(prompt);
-    setPrompt("");
+    setPrompt(curText);
+    setCurText("");
   }
   return (
     <div>
@@ -16,14 +20,14 @@ function PromptBox() {
         <input
           name="promptText"
           placeholder="Enter text here..."
-          value={prompt}
-          onChange={(text) => setPrompt(text.target.value)}
+          value={curText}
+          onChange={(text) => setCurText(text.target.value)}
         />
       </form>
       <button
         onClick={() => {
-          console.log(prompt);
-          setPrompt("");
+          setPrompt(curText);
+          setCurText("");
         }}
       >
         Submit
