@@ -5,13 +5,14 @@ function PromptBox() {
   // state variable that tracks the inputted text
   const [prompt, setPrompt] = useState("");
   // submission handler
-  function handleSubmit() {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     console.log(prompt);
     setPrompt("");
   }
   return (
-    <>
-      <form method="post" onSubmit={handleSubmit}>
+    <div>
+      <form method="post" onSubmit={(x) => handleSubmit(x)}>
         <input
           name="promptText"
           placeholder="Enter text here..."
@@ -19,8 +20,15 @@ function PromptBox() {
           onChange={(text) => setPrompt(text.target.value)}
         />
       </form>
-      <button onClick={handleSubmit}>Submit</button>
-    </>
+      <button
+        onClick={() => {
+          console.log(prompt);
+          setPrompt("");
+        }}
+      >
+        Submit
+      </button>
+    </div>
   );
 }
 
